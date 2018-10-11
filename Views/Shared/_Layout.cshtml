@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - assignment4</title>
+
+    <environment include="Development">
+
+    </environment>
+    <environment exclude="Development">
+
+    </environment>
+    <environment names="Development">
+        <script src="~/dist/main.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/dist/main.js" asp-append-version="true"></script>
+    </environment>
+
+</head>
+    <body>
+
+        <div class="">
+            @RenderBody()
+        </div>
+
+        <environment include="Development">
+        </environment>
+        <environment exclude="Development">
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>
