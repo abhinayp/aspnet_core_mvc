@@ -1,2 +1,47 @@
 ﻿body {
 }
+
+.login-class {
+    background: url("/images/lb_cover.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+.login-class::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom right,#fff,#fff);
+    opacity: .7;
+}
+
+.bg-teal {
+    background-color: #20c997;
+}
+
+.text-teal {
+    color: #20c997;
+}
+
+.b-trans {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.page-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.input-modern {
+    border: none;
+    border-bottom: 1px solid #20c997;
+}
+.b-transparent {
+    background-color: transparent;
+}
+.w-250 {
+    width: 350px;
+}

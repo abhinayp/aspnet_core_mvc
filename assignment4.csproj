@@ -7,16 +7,27 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
+    <PackageReference Include="JWT" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="webpack.config" />
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Contact.cshtml" />
+    <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="wwwroot\images\login.jpg" />
+    <Content Remove="wwwroot\images\lb_cover.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Client\css\" />
     <Folder Include="Client\js\" />
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\login.jpg" />
+    <None Include="wwwroot\images\lb_cover.jpg" />
   </ItemGroup>
 </Project>

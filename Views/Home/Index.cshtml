@@ -1,7 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var shopping_list = ViewBag.shopping_list;
 }
 
-<div class="text-primary">
-    Hey
+<div class="row">
+    @for (var i = 0; i < shopping_list.Count; i++)
+    {
+        <div class="col-md-3">
+            <div class="bg-light rounded mt-2 mb-2">
+                <div class=" p-2">
+                    <h3 class="text-primary">@shopping_list[i].Title</h3>
+                    <div class="text-grey">@shopping_list[i].Description</div>
+                </div>
+                <div>
+                    <img class="w-100 rounded-bottom" src=@shopping_list[i].Url />
+                </div>
+            </div>
+        </div>
+    }
 </div>

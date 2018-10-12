@@ -21,6 +21,10 @@ namespace assignment4.Controllers
             if (_context.ShoppingList.Count() == 0)
             {
                 _context.ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 3", Description = "A Google Product" });
+                _context.ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 2", Description = "A Google Product" });
+                _context.ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 2", Description = "A Google Product" });
+                _context.ShoppingList.Add(new ShoppingItem { Title = "iPhone X", Description = "An Apple Product" });
+                _context.ShoppingList.Add(new ShoppingItem { Title = "iPhone XS", Description = "An Apple Product" });
                 _context.SaveChanges();
             }
         }
