@@ -10,8 +10,16 @@ namespace assignment4.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ShoppingListContext _context;
+
+        public HomeController(ShoppingListContext context) {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            var shopping_list = _context.ShoppingList.ToList();
+            ViewBag.shopping_list = shopping_list;
             return View();
         }
 
