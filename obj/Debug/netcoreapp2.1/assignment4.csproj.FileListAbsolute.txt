@@ -47,7 +47,6 @@
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/assignment4.TagHelpers.output.cache
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/assignment4.RazorCoreGenerate.cache
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/Razor/Views/Home/Index.g.cshtml.cs
-/Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/Razor/Views/Home/Privacy.g.cshtml.cs
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs
 /Users/abhinay/GitHub/aspnet_core_mvc/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_Layout.g.cshtml.cs

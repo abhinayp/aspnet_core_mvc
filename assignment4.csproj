@@ -13,10 +13,15 @@
     <Content Remove="webpack.config" />
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Contact.cshtml" />
+    <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\" />
     <Folder Include="Client\css\" />
     <Folder Include="Client\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\logo.png" />
   </ItemGroup>
 </Project>

@@ -18,11 +18,11 @@ namespace assignment4.Controllers
         {
             _context = context;
 
-            if (_context.ShoppingList.Count() == 0)
-            {
-                _context.ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 3", Description = "A Google Product" });
-                _context.SaveChanges();
-            }
+            //if (_context.ShoppingList.Count() == 0)
+            //{
+            //    _context.ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 3", Description = "A Google Product" });
+            //    _context.SaveChanges();
+            //}
         }
 
         [HttpGet]
@@ -42,8 +42,26 @@ namespace assignment4.Controllers
             return new ObjectResult(item);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Update(long id, [FromForm] ShoppingItem item)
+        {
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var entity = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
+            entity.Title = item.Title;
+            entity.Description = item.Description;
+            entity.Url = item.Url;
+            _context.SaveChanges();
+
+            return new ObjectResult(entity);
+        }
+
         [HttpPost]
-        public IActionResult Create([FromBody] ShoppingItem item)
+        public IActionResult Create([FromForm] ShoppingItem item)
         {
             if (item == null)
             {
