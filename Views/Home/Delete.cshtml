@@ -1,0 +1,70 @@
+﻿@page
+@{
+    var data = ViewBag.item;
+}
+
+<div class="p-4">
+    <div class="row">
+        <div class="col-md-5">
+            <div><span class="h1">@data.Title </span> <a class="ml-1" href="/item/edit/@data.Id"><small>Edit</small></a> </div>
+
+            <div class="mt-2">@data.Description</div>
+
+            <div class="mt-3">
+                <img src="@data.Url" class="w-100" alt="No Image" />
+            </div>
+
+            <div class="mt-3">
+                <span class="">Want to delete this item?</span> <a href="#" class="text-danger" data-toggle="modal" data-target="#deleteModal">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <form class="form-delete" action="/api/shoppinglist/@data.Id" method="post">
+            <div class="modal-content">
+                <div class="mt-3">
+                    <div class="text-center">
+                        <h5 class="">Are You Sure?</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <input type="hidden" name="_method" value="delete" />
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    $(document).ready(function() {
+        let url = $("form.form-delete").attr("action");
+        $('form.form-delete').submit(function () {
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                data: $('form.form-delete').serialize(),
+                success: function(data, textStatus) {
+                        // data.redirect contains the string URL to redirect to
+                        window.location.href = "/";
+
+                }
+
+            });
+            return false;
+        });
+
+    });
+    </script>
+}

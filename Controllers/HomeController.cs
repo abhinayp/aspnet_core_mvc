@@ -13,17 +13,35 @@ namespace assignment4.Controllers
     {
         private readonly ShoppingListContext _context;
 
-        public HomeController(ShoppingListContext context) {
+        public HomeController(ShoppingListContext context)
+        {
             _context = context;
         }
 
-        [HttpGet("/")]
+        [HttpGet("/", Name = "home")]
         public IActionResult Index()
         {
             var shopping_list = _context.ShoppingList.ToList();
             ViewBag.shopping_list = shopping_list;
             return View();
         }
+
+        [HttpGet("{id}", Name = "item")]
+        public IActionResult Item(int id)
+        {
+            var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
+            ViewBag.item = item;
+            return View("Delete");
+        }
+
+        [HttpGet("edit/{id}")]
+        public IActionResult EditItem(int id)
+        {
+            var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
+            ViewBag.item = item;
+            return View("Edit");
+        }
+
 
     }
 }
