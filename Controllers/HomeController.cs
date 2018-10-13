@@ -13,11 +13,12 @@ namespace assignment4.Controllers
     {
         private readonly ShoppingListContext _context;
 
-        public HomeController(ShoppingListContext context) {
+        public HomeController(ShoppingListContext context)
+        {
             _context = context;
         }
 
-        [HttpGet("/")]
+        [HttpGet("/", Name = "home")]
         public IActionResult Index()
         {
             var shopping_list = _context.ShoppingList.ToList();
@@ -25,7 +26,7 @@ namespace assignment4.Controllers
             return View();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "item")]
         public IActionResult Item(int id)
         {
             var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);

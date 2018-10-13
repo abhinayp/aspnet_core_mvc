@@ -71,7 +71,7 @@ namespace assignment4.Controllers
             _context.ShoppingList.Add(item);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetShoppingItem", new { id = item.Id }, item);
+            return RedirectToAction(item.Id.ToString(), "item");
         }
 
         [HttpDelete("{id}")]
@@ -87,7 +87,7 @@ namespace assignment4.Controllers
             Console.WriteLine("abhinay found");
             _context.ShoppingList.Remove(item);
             _context.SaveChanges();
-            return new NoContentResult();
+            return NoContent();
         }
     }
 }

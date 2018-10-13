@@ -54,6 +54,8 @@ namespace assignment4
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseHttpMethodOverride();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
