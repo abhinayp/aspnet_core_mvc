@@ -8,6 +8,7 @@ using assignment4.Models;
 
 namespace assignment4.Controllers
 {
+    [Route("item")]
     public class HomeController : Controller
     {
         private readonly ShoppingListContext _context;
@@ -16,6 +17,7 @@ namespace assignment4.Controllers
             _context = context;
         }
 
+        [HttpGet("/")]
         public IActionResult Index()
         {
             var shopping_list = _context.ShoppingList.ToList();
@@ -23,29 +25,22 @@ namespace assignment4.Controllers
             return View();
         }
 
-        public IActionResult About()
+        [HttpGet("delete/{id}")]
+        public IActionResult DeleteItem(int id)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
+            ViewBag.item = item;
+            return View("Delete");
         }
 
-        public IActionResult Contact()
+        [HttpGet("edit/{id}")]
+        public IActionResult EditItem(int id)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
+            ViewBag.item = item;
+            return View("Edit");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

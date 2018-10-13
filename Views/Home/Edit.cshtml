@@ -1,0 +1,22 @@
+﻿@page
+@{
+    var data = ViewBag.item;
+
+}
+<div class="p-4">
+    <div class="row">
+        <div class="col-md-5">
+            <h1>
+                <span class="">Want to edit this item?</span> 
+            </h1>
+            <form>
+               <div class="p-3">
+                   <div  class="mt-3"> Change the Title to: <input type="text" placeholder="@data.Title"> </div>
+                   <div class="mt-3">Change the Description to: <input type="text" placeholder="@data.Description"> </div>
+                   <div class="mt-3">Change the Url to: <input type="text" placeholder="@data.Url"> </div>
+                   <button type="submit" class="btn btn-primary mt-4">Save</button>
+               </div>
+            </form>
+        </div>
+    </div>
+</div>

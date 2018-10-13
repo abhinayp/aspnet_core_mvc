@@ -80,9 +80,11 @@ namespace assignment4.Controllers
             var item = _context.ShoppingList.First(t => t.Id == id);
             if (item == null)
             {
+                Console.WriteLine("abhinay not found");
                 return NotFound();
             }
 
+            Console.WriteLine("abhinay found");
             _context.ShoppingList.Remove(item);
             _context.SaveChanges();
             return new NoContentResult();
