@@ -1,10 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     var shopping_list = ViewBag.shopping_list;
+    ViewData["bodyClass"] = "bg-background";
 }
 
-<div>
-
+<div class="mx-4 mt-2">
+    <div class="row">
+        @foreach (var item in shopping_list)
+        {
+            <div class="col-md-3 my-3">
+                <div class="bg-white rounded shadow-sm">
+                    <div class="p-3 px-4">
+                        <h3 class="text-primary">@item.Title</h3>
+                        <div>@item.Description</div>
+                    </div>
+                    <div class="">
+                        <img src=@item.Url class="w-100 rounded-bottom" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 
 </div>
 
