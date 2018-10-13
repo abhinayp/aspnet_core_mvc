@@ -25,8 +25,8 @@ namespace assignment4.Controllers
             return View();
         }
 
-        [HttpGet("delete/{id}")]
-        public IActionResult DeleteItem(int id)
+        [HttpGet("{id}")]
+        public IActionResult Item(int id)
         {
             var item = _context.ShoppingList.FirstOrDefault(t => t.Id == id);
             ViewBag.item = item;
