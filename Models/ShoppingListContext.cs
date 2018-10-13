@@ -13,8 +13,8 @@ namespace assignment4.Models
         {
             if (ShoppingList.Count() == 0)
             {
-               ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 3", Description = "A Google Product" });
-               SaveChanges();
+                ShoppingList.Add(new ShoppingItem { Title = "Google Pixel 3", Description = "A Google Product", Url = "https://images.idgesg.net/images/article/2018/10/pixel_3_xl_bigger_notch_long-100776124-large.jpg" });
+                SaveChanges();
             }
         }
 
