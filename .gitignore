@@ -2,3 +2,5 @@ node_modules/
 package-lock.json
 obj/
 .vs/
+bin/
+.DS_Store
