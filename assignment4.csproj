@@ -15,6 +15,7 @@
     <Content Remove="Views\Home\Contact.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
     <Content Remove="wwwroot\images\logo.png" />
+    <Content Remove="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\" />
@@ -23,5 +24,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\ShoppingListContext.cs" />
+    <Compile Remove="Models\ErrorViewModel.cs" />
+    <Compile Remove="Controllers\ShoppingListController.cs" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
-        <form class="form-delete" action="/api/shoppinglist/@data.Id" method="post">
+        <form class="form-delete" action="/item/delete/@data.Id" method="post">
             <div class="modal-content">
                 <div class="mt-3">
                     <div class="text-center">
@@ -49,21 +49,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
     $(document).ready(function() {
-        let url = $("form.form-delete").attr("action");
-        $('form.form-delete').submit(function () {
-            $.ajax({
-                url: url,
-                type: 'DELETE',
-                data: $('form.form-delete').serialize(),
-                success: function(data, textStatus) {
-                        // data.redirect contains the string URL to redirect to
-                        window.location.href = "/";
 
-                }
-
-            });
-            return false;
-        });
 
     });
     </script>
