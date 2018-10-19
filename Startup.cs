@@ -33,7 +33,6 @@ namespace assignment4
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ShoppingListContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
