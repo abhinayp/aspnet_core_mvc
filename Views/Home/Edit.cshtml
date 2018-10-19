@@ -6,18 +6,59 @@
 <div class="p-4">
     <div class="row">
         <div class="col-md-5">
-            <h1>
-                <span class="">Want to edit this item?</span>
-            </h1>
+            <div class="px-3">
+                <h1>
+                    <span class="">Want to edit this item?</span>
+                </h1>
+                <small class=""><a href="/item/@data.Id">Click here</a> for preview</small>
+            </div>
             <form class="form-put" method="post" action="/item/update/@data.Id">
                 <div class="p-3">
-                    <div class="mt-3"> Change the Title to: <input type="text" name="Title" value="@data.Title"> </div>
-                    <div class="mt-3">Change the Description to: <input type="text" name="Description" value="@data.Description"> </div>
-                    <div class="mt-3">Change the Url to: <input type="text" name="Url" value="@data.Url"> </div>
+                    <div class="mt-3">
+                        <small>Title</small>
+                        <div><input class="form-control" placeholder="Title" type="text" name="Title" value="@data.Title"></div>
+                    </div>
+                    <div class="mt-3">
+                        <small>Description</small>
+                        <div><textarea class="form-control" placeholder="Description" type="text" name="Description" value="@data.Description"></textarea></div>
+                    </div>
+                    <div class="mt-3">
+                        <small>Url</small>
+                        <input class="url form-control" placeholder="Url" type="text" name="Url" value="@data.Url"> </div>
                     <button type="submit" class="btn btn-primary mt-4">Save</button>
+                    <button type="button" class="btn btn-danger mt-4 ml-3"data-toggle="modal" data-target="#deleteModal">Delete</button>
                 </div>
             </form>
         </div>
+        <div class="col-md-7">
+            <div class="mt-3">
+                <img src="@data.Url" class="image w-100" alt="Image not available" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <form class="form-delete" action="/item/delete/@data.Id" method="post">
+            <div class="modal-content">
+                <div class="mt-3">
+                    <div class="text-center">
+                        <h5 class="">Are You Sure?</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <input type="hidden" name="_method" value="delete" />
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -25,7 +66,10 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
     $(document).ready(function() {
-
+        $(document).on('keyup', '.url', function() {
+            let url = $(this).val();
+            $(".image").attr('src', url);
+        })
     });
 </script>
 }
