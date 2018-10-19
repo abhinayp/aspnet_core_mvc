@@ -53,7 +53,7 @@ namespace assignment4.Controllers
         {
             var shopping_item = await shoppingListClient.AddItem(item);
             ViewBag.item = shopping_item;
-            return RedirectToAction(item.Id.ToString(), "item");
+            return RedirectToAction(shopping_item.Id.ToString(), "item");
         }
 
         [HttpPost("delete/{id}")]
