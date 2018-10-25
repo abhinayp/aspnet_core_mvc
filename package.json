@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
-    "webpack": "webpack --watch --progress"
+    "webpack": "webpack --watch --progress",
+    "start": "concurrently \"dotnet run \" \"npm run webpack\""
   },
   "devDependencies": {
     "@angular/animations": "4.2.5",
@@ -29,6 +30,7 @@
     "awesome-typescript-loader": "3.2.1",
     "bootstrap": "3.3.7",
     "chai": "4.0.2",
+    "concurrently": "^4.0.0",
     "css": "2.2.1",
     "css-loader": "0.28.4",
     "es6-shim": "0.35.3",

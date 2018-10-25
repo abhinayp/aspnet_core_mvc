@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "283e3f27ea820db19690"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8b236847c4b66efd5514"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1721,7 +1721,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "@media (max-width: 767px) {\r\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\r\n    .body-content {\r\n        padding-top: 50px;\r\n    }\r\n}\r\n", ""]);
+exports.push([module.i, "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n", ""]);
 
 // exports
 
@@ -1735,7 +1735,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "/* Keep the nav menu independent of scrolling and on top of other items */\r\n.main-nav {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    z-index: 1;\r\n}\r\n/* Highlighting rules for nav menu items */\r\n.link-active a,\r\n.link-active a:hover,\r\n.link-active a:focus {\r\n    background-color: #288ffd;\r\n    color: white;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n    /* On small screens, convert the nav menu to a vertical sidebar */\r\n    .main-nav {\r\n        height: 100%;\r\n        width: calc(16.6% - 20px);\r\n    }\r\n\r\n    .navbar {\r\n        padding: 0px;\r\n    }\r\n\r\n}\r\n", ""]);
+exports.push([module.i, "/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n/* Highlighting rules for nav menu items */\n.link-active a,\n.link-active a:hover,\n.link-active a:focus {\n    background-color: #288ffd;\n    color: white;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(16.6% - 20px);\n    }\n\n    .navbar {\n        padding: 0px;\n    }\n\n}\n", ""]);
 
 // exports
 
@@ -2070,19 +2070,19 @@ module.exports = XmlEntities;
 /* 20 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container-fluid'>\r\n    <div class='row'>\r\n        <div class='col-sm-2'>\r\n            <nav-menu></nav-menu>\r\n        </div>\r\n        <div class='col-sm-10 body-content'>\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-2'>\n            <nav-menu></nav-menu>\n        </div>\n        <div class='col-sm-10 body-content'>\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mx-4 mt-2\">\r\n    <div class=\"py-2\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-9\">\r\n                        <div class=\"text-dark h3 p-0 m-0\">Shopping List</div>\r\n                        <small class=\"text-secondary\">List of items that are avaialble to shop</small>\r\n                    </div>\r\n                    <div class=\"col-md-3\">\r\n                        <div class=\"text-right\">\r\n                            <button type=\"button\" class=\"btn btn-primary \" data-toggle=\"modal\" data-target=\"#createModal\">\r\n                                <span class=\"glyphicon glyphicon-plus\"></span> Create Item\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"shoppingItem.length > 0\" class=\"row\">\r\n        <div *ngFor=\"let item of shoppingItem\" class=\"col-md-4 my-3\">\r\n            <a class=\"no-text-decoration\" href=\"/item/{{item.id}}\">\r\n                <div class=\"bg-white rounded shadow-hover\">\r\n                    <div class=\"p-3 px-4\">\r\n                        <h3 class=\"text-primary\">{{item.title}}</h3>\r\n                        <div class=\"text-dark\">{{item.description}}</div>\r\n                    </div>\r\n                    <div class=\"\">\r\n                        <img src={{item.url}} class=\"w-100 rounded-bottom\" />\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"mx-4 mt-2\">\n    <div class=\"py-2\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"row\">\n                    <div class=\"col-md-9\">\n                        <div class=\"text-dark h3 p-0 m-0\">Shopping List</div>\n                        <small class=\"text-secondary\">List of items that are avaialble to shop</small>\n                    </div>\n                    <div class=\"col-md-3\">\n                        <div class=\"text-right\">\n                            <button type=\"button\" class=\"btn btn-primary \" data-toggle=\"modal\" data-target=\"#createModal\">\n                                <span class=\"glyphicon glyphicon-plus\"></span> Create Item\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div *ngIf=\"shoppingItem.length > 0\" class=\"row\">\n        <div *ngFor=\"let item of shoppingItem\" class=\"col-md-4 my-3\">\n            <a class=\"no-text-decoration\" href=\"/item/{{item.id}}\">\n                <div class=\"bg-white rounded shadow-hover\">\n                    <div class=\"p-3 px-4\">\n                        <h3 class=\"text-primary\">{{item.title}}</h3>\n                        <div class=\"text-dark\">{{item.description}}</div>\n                    </div>\n                    <div class=\"\">\n                        <img src={{item.url}} class=\"w-100 rounded-bottom\" />\n                    </div>\n                </div>\n            </a>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main-nav bg-white shadow-sm\">\r\n    <div>\r\n        <div class=\"text-center p-3 bg-light\">\r\n            <a href=\"/\">\r\n                <img src=\"/images/logo.png\" class=\"d-inline-block align-top\" height=\"25px\" />\r\n                <b class=\"ml-1\">Shopping Cart</b>\r\n            </a>\r\n        </div>\r\n        <div class=\"text-center\">\r\n            <nav class=\"navbar navbar-expand-lg\">\r\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler-icon\"></span>\r\n                </button>\r\n                <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n                    <div class=\"w-100\">\r\n                        <div [routerLinkActive]=\"['link-active']\">\r\n                            <a class=\"nav-item nav-link\" [routerLink]=\"['/']\">Home </a>\r\n                        </div>\r\n                        <div [routerLinkActive]=\"['link-active']\">\r\n                            <a class=\"nav-item nav-link\" href=\"#\">Shopping List </a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"main-nav bg-white shadow-sm\">\n    <div>\n        <div class=\"text-center p-3 bg-light\">\n            <a href=\"/\">\n                <img src=\"/images/logo.png\" class=\"d-inline-block align-top\" height=\"25px\" />\n                <b class=\"ml-1\">Shopping Cart</b>\n            </a>\n        </div>\n        <div class=\"text-center\">\n            <nav class=\"navbar navbar-expand-lg\">\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n                <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n                    <div class=\"w-100\">\n                        <div [routerLinkActive]=\"['link-active']\">\n                            <a class=\"nav-item nav-link\" [routerLink]=\"['/']\">Home </a>\n                        </div>\n                        <div [routerLinkActive]=\"['link-active']\">\n                            <a class=\"nav-item nav-link\" href=\"#\">Shopping List </a>\n                        </div>\n                    </div>\n                </div>\n            </nav>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
 /* 23 */
