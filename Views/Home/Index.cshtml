@@ -1,31 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var shopping_list = ViewBag.shopping_list;
     ViewData["bodyClass"] = "bg-background";
 }
+<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}
 
-<div class="mx-4 mt-2">
-    <div class="row">
-        @foreach (var item in shopping_list)
-        {
-            <div class="col-md-3 my-3">
-                <a class="no-text-decoration" href="/item/@item.Id">
-                    <div class="bg-white rounded shadow-hover">
-                        <div class="p-3 px-4">
-                            <h3 class="text-primary">@item.Title</h3>
-                            <div class="text-dark">@item.Description</div>
+@*<div class="mx-4 mt-2">
+        <div class="row">
+            @foreach (var item in shopping_list)
+            {
+                <div class="col-md-3 my-3">
+                    <a class="no-text-decoration" href="/item/@item.Id">
+                        <div class="bg-white rounded shadow-hover">
+                            <div class="p-3 px-4">
+                                <h3 class="text-primary">@item.Title</h3>
+                                <div class="text-dark">@item.Description</div>
+                            </div>
+                            <div class="">
+                                <img src=@item.Url class="w-100 rounded-bottom" />
+                            </div>
                         </div>
-                        <div class="">
-                            <img src=@item.Url class="w-100 rounded-bottom" />
-                        </div>
-                    </div>
-                </a>
+                    </a>
 
-            </div>
-        }
-    </div>
+                </div>
+            }
+        </div>
 
-</div>
-
-
+    </div>*@
 

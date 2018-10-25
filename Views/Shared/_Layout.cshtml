@@ -4,12 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] assignment4</title>
-
+    <base href="~/" />
     <environment include="Development">
-
     </environment>
     <environment exclude="Development">
-
     </environment>
     <environment names="Development">
         <script src="~/dist/main.js"></script>
@@ -25,25 +23,9 @@
     <environment names="Staging,Production">
         <script src="~/dist/main.js" asp-append-version="true"></script>
     </environment>
-
 </head>
 <body class=@ViewData["bodyClass"]>
     <div class="">
-        <nav class="navbar navbar-light bg-light justify-content-between shadow-sm">
-            <a class="navbar-brand" href="/">
-                <img src="/images/logo.png" class="d-inline-block align-top" height="30px" />
-                <b class="ml-1">Shopping Cart</b>
-            </a>
-            <!-- Button trigger create item modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                Create Item
-            </button>
-
-            @*<form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>*@
-        </nav>
         @RenderBody()
     </div>
 

@@ -1,0 +1,28 @@
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+/* Highlighting rules for nav menu items */
+.link-active a,
+.link-active a:hover,
+.link-active a:focus {
+    background-color: #288ffd;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    /* On small screens, convert the nav menu to a vertical sidebar */
+    .main-nav {
+        height: 100%;
+        width: calc(16.6% - 20px);
+    }
+
+    .navbar {
+        padding: 0px;
+    }
+
+}

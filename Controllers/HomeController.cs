@@ -14,29 +14,31 @@ namespace assignment4.Controllers
     {
         private ShoppingListClient shoppingListClient = new ShoppingListClient("https://localhost:25234");
 
-
         [HttpGet("/", Name = "home")]
+        public IActionResult Index()
+        {
+            return View("Index");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> IndexAsync()
         {
             var shopping_list = await shoppingListClient.getAll();
-            ViewBag.shopping_list = shopping_list;
-            return View("Index");
+            return new ObjectResult(shopping_list);
         }
 
         [HttpGet("{id}", Name = "item")]
         public async Task<IActionResult> ItemAsync(int id)
         {
             var item = await shoppingListClient.getItem(id);
-            ViewBag.item = item;
-            return View("Delete");
+            return new ObjectResult(item);
         }
 
         [HttpGet("edit/{id}")]
         public async Task<IActionResult> EditItemAsync(int id)
         {
             var item = await shoppingListClient.getItem(id);
-            ViewBag.item = item;
-            return View("Edit");
+            return new ObjectResult(item);
         }
 
         [HttpPost("update/{id}")]
@@ -45,14 +47,13 @@ namespace assignment4.Controllers
 
             var shopping_item = await shoppingListClient.UpdateItem(id, item);
             ViewBag.item = shopping_item;
-            return View("Edit");
+            return new ObjectResult(item);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] ShoppingItem item)
         {
             var shopping_item = await shoppingListClient.AddItem(item);
-            ViewBag.item = shopping_item;
             return RedirectToAction(shopping_item.Id.ToString(), "item");
         }
 
