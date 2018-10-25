@@ -42,7 +42,7 @@ namespace assignment4.Controllers
         }
 
         [HttpPost("update/{id}")]
-        public async Task<IActionResult> Update(int id, [FromForm] ShoppingItem item)
+        public async Task<IActionResult> Update(int id, [FromBody] ShoppingItem item)
         {
 
             var shopping_item = await shoppingListClient.UpdateItem(id, item);
@@ -51,7 +51,7 @@ namespace assignment4.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] ShoppingItem item)
+        public async Task<IActionResult> Create([FromBody] ShoppingItem item)
         {
             var shopping_item = await shoppingListClient.AddItem(item);
             return RedirectToAction(shopping_item.Id.ToString(), "item");
