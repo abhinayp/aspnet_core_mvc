@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2a9c3743eddbb22bf715"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2ee57ecc62395934a37e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1708,6 +1708,10 @@ var HomeComponent = (function () {
         }
         else {
             this.http.get('/item/' + itemName).subscribe(function (result) {
+                if (!result.json()) {
+                    _this.getItemsDetails('');
+                    return;
+                }
                 _this.showAll = false;
                 var shoppingItem = result.json();
                 _this.shoppingItem = shoppingItem;
@@ -1720,6 +1724,10 @@ var HomeComponent = (function () {
         var _this = this;
         var item = this.createShoppingItem;
         this.http.post('/item', item).subscribe(function (result) {
+            if (!result.json()) {
+                _this.getItemsDetails('');
+                return;
+            }
             _this.showAll = false;
             var shoppingItem = result.json();
             _this.getItemsDetails(shoppingItem.id.toString());
@@ -1728,6 +1736,10 @@ var HomeComponent = (function () {
     HomeComponent.prototype.updateItem = function (item) {
         var _this = this;
         this.http.post("/item/update/" + item.id, item).subscribe(function (result) {
+            if (!result.json()) {
+                _this.getItemsDetails(item.id.toString());
+                return;
+            }
             _this.showAll = false;
             var shoppingItem = result.json();
             _this.shoppingItem = shoppingItem;
@@ -1746,7 +1758,7 @@ var HomeComponent = (function () {
     HomeComponent.prototype.onClickEdit = function (status) {
         if (status === void 0) { status = false; }
         this.editItem = status;
-        this.updateTitleBar(!status);
+        this.updateTitleBar();
     };
     HomeComponent.prototype.updateTitleBar = function (defaultValues, title, description) {
         this.title = title || this.shoppingItem.title;

@@ -51,6 +51,11 @@ export class HomeComponent {
         }
         else {
             this.http.get('/item/' + itemName).subscribe(result => {
+                if (!result.json()) {
+                    this.getItemsDetails('');
+                    return
+                }
+
                 this.showAll = false;
                 let shoppingItem: ShoppingItem = result.json();
                 this.shoppingItem = shoppingItem;
@@ -63,6 +68,11 @@ export class HomeComponent {
     createItem() {
         let item = this.createShoppingItem;
         this.http.post('/item', item).subscribe(result => {
+            if (!result.json()) {
+                this.getItemsDetails('');
+                return
+            }
+
             this.showAll = false;
             let shoppingItem: ShoppingItem = result.json();
             this.getItemsDetails(shoppingItem.id.toString());
@@ -72,10 +82,16 @@ export class HomeComponent {
 
     updateItem(item: ShoppingItem) {
         this.http.post(`/item/update/${item.id}`, item).subscribe(result => {
+            if (!result.json()) {
+                this.getItemsDetails(item.id.toString());
+                return
+            }
+
             this.showAll = false
             let shoppingItem: ShoppingItem = result.json();
             this.shoppingItem = shoppingItem;
             this.onClickEdit(false);
+
         });
     }
 
@@ -91,7 +107,7 @@ export class HomeComponent {
 
     onClickEdit(status: boolean = false) {
         this.editItem = status;
-        this.updateTitleBar(!status);
+        this.updateTitleBar();
     }
 
     updateTitleBar(defaultValues?:boolean, title?: string, description?: string) {
