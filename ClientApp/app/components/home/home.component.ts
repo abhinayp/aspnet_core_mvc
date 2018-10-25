@@ -7,14 +7,14 @@ import { ShoppingItem } from '../model/ShoppingItem';
 
 @Component({
     selector: 'home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
 })
 
 export class HomeComponent {
 
     public shoppingItems: ShoppingItem[] = [];
-    public shoppingItem = new ShoppingItem(0, "", "", "");
-    public createShoppingItem = new ShoppingItem(0, "", "", "");
+    public shoppingItem = new ShoppingItem(-1, "", "", "", 0);
+    public createShoppingItem = new ShoppingItem(-1, "", "", "", 0);
 
     public showAll: boolean = true;
     public editItem: boolean = false;
@@ -24,6 +24,18 @@ export class HomeComponent {
     //Inital Load
     constructor(public http: Http) {
         this.getItemsDetails('');
+    }
+
+    formatter() {
+        // Create our number formatter.
+        let formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2,
+            // the default value for minimumFractionDigits depends on the currency
+            // and is usually already 2
+        });
+        return formatter;
     }
 
     //Get all the Item Details and Item Details by Item Id

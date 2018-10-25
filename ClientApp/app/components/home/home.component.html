@@ -7,15 +7,19 @@
                         <div *ngIf="!editItem; else edit">
                             <div class="text-dark h3 p-0 m-0">{{title}}</div>
                             <small class="text-secondary">{{description}}</small>
+                            <div *ngIf="shoppingItem.id > -1" class="text-primary h3 my-2">{{formatter().format(shoppingItem.price)}}</div>
                         </div>
                         <ng-template #edit>
                             <div *ngIf="shoppingItem">
                                 <div>
-                                    <input type="text" [(ngModel)]="shoppingItem.title" class="border-0 h3 w-100 rounded p-2" />
+                                    <input type="text" [(ngModel)]="shoppingItem.title" class="border-0 h3 w-100 rounded p-2" placeholder="Title" />
                                 </div>
                                 <small>
-                                    <textarea type="text" [(ngModel)]="shoppingItem.description" class="border-0 w-100 rounded p-2">{{shoppingItem.description}}</textarea>
+                                    <textarea type="text" [(ngModel)]="shoppingItem.description" class="border-0 w-100 rounded p-2" placeholder="Description">{{shoppingItem.description}}</textarea>
                                 </small>
+                                <div>
+                                    <input type="text" [(ngModel)]="shoppingItem.price" class="border-0 h3 w-100 rounded p-2 text-primary" placeholder="Price" />
+                                </div>
                             </div>
                         </ng-template>
                     </div>
@@ -36,10 +40,13 @@
                 <div class="bg-white rounded shadow-hover">
                     <div class="p-3 px-4">
                         <h3 class="text-primary">{{item.title}}</h3>
-                        <div class="text-dark">{{item.description}}</div>
                     </div>
                     <div class="">
-                        <img src={{item.url}} class="w-100 rounded-bottom" />
+                        <img src={{item.url}} class="w-100 " />
+                    </div>
+                    <div class="p-3 px-4 pt-4 rounded-bottom">
+                        <h3 class="text-dark">{{formatter().format(item.price)}}</h3>
+                        <div class="text-dark">{{item.description}}</div>
                     </div>
                 </div>
             </a>
@@ -49,14 +56,14 @@
     <ng-template #individualItem>
         <div *ngIf="shoppingItem">
             <div class="row">
-                <div class="col-md-6 my-3">
+                <div class="col-md-6">
                     <div class="">
                         <div class="">
                             <img src={{shoppingItem.url}} class="w-100" />
                         </div>
                         <div *ngIf="editItem; else options">
                             <div class="my-3">
-                                <input type="text" [(ngModel)]="shoppingItem.url" class="border-0 w-100 rounded p-2" />
+                                <input type="text" [(ngModel)]="shoppingItem.url" class="border-0 w-100 rounded p-2" placeholder="URL" />
                             </div>
                             <div class="my-3">
                                 <button href="#" (click)="updateItem(shoppingItem)" class="btn btn-primary">Save</button>
