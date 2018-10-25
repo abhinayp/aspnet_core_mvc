@@ -14,6 +14,7 @@ export class HomeComponent {
 
     public shoppingItems: ShoppingItem[] = [];
     public shoppingItem = new ShoppingItem(0, "", "", "");
+    public createShoppingItem = new ShoppingItem(0, "", "", "");
 
     public showAll: boolean = true;
     public editItem: boolean = false;
@@ -47,12 +48,12 @@ export class HomeComponent {
     }
 
     // Create a new item
-    createItem(item: ShoppingItem) {
-
+    createItem() {
+        let item = this.createShoppingItem;
         this.http.post('/item', item).subscribe(result => {
-            this.showAll = false
+            this.showAll = false;
             let shoppingItem: ShoppingItem = result.json();
-            this.shoppingItem = shoppingItem;
+            this.getItemsDetails(shoppingItem.id.toString());
         });
 
     }

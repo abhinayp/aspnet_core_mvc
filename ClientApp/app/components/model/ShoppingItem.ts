@@ -5,4 +5,4 @@
         public description: string,
         public url: string,
     ) { }
-}  
+}
