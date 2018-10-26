@@ -13,11 +13,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="w-100">
-                        <div [routerLinkActive]="['link-active']">
-                            <a class="nav-item nav-link" [routerLink]="['/']">Home </a>
+                        <div [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+                            <a class="nav-item nav-link" [routerLink]="['/']" >Home</a>
                         </div>
                         <div [routerLinkActive]="['link-active']">
-                            <a class="nav-item nav-link" href="#">Shopping List </a>
+                            <a class="nav-item nav-link"  [routerLink]="['/cart']">Cart</a>
                         </div>
                     </div>
                 </div>

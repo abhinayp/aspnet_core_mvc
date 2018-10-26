@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Http,Headers, Response, Request, RequestMethod, URLSearchParams, RequestOptions } from "@angular/http";
 import { ShoppingItem } from '../model/ShoppingItem';
+import { CartItemDetails } from "../model/CartItemDetails";
 
 @Component({
     selector: 'home',
@@ -13,13 +14,18 @@ import { ShoppingItem } from '../model/ShoppingItem';
 export class HomeComponent {
 
     public shoppingItems: ShoppingItem[] = [];
+    public cartItem: CartItemDetails[] = [];
+
     public shoppingItem = new ShoppingItem(-1, "", "", "", 0);
     public createShoppingItem = new ShoppingItem(-1, "", "", "", 0);
 
     public showAll: boolean = true;
     public editItem: boolean = false;
+    public showCart: boolean = false;
+
     public title: string = "";
     public description: string = "";
+    public cartTotalPrice: number = 0;
 
     //Inital Load
     constructor(public http: Http) {
@@ -118,5 +124,40 @@ export class HomeComponent {
             this.title = "Shopping List";
             this.description = "List of items that are avaialble to shop";
         }
+    }
+
+
+    addToCart(item: ShoppingItem) {
+        let find_item_index = this.cartItem.findIndex(i => i.CItem.id == item.id);
+        if (find_item_index > -1) {
+            this.cartItem[find_item_index].CQty = this.cartItem[find_item_index].CQty + 1;
+            this.cartItem[find_item_index].CTotalPrice = this.cartItem[find_item_index].CItem.price * this.cartItem[find_item_index].CQty;
+        }
+        else {
+            this.cartItem.push(new CartItemDetails(item, 1, item.price));
+        }
+        this.calCartTotalPrice();
+    }
+
+    deleteFromCart(item: ShoppingItem) {
+      let find_item_index = this.cartItem.findIndex(i => i.CItem.id == item.id);
+      if (find_item_index > -1) {
+        this.cartItem.splice(find_item_index, 1);
+      }
+      this.calCartTotalPrice()
+    }
+
+    onShowCart(status: boolean) {
+        this.showCart = status;
+        this.calCartTotalPrice();
+    }
+
+    calCartTotalPrice() {
+        let totalPrice = 0;
+        for (let i in this.cartItem) {
+            let c = this.cartItem[i];
+            totalPrice = totalPrice + c.CTotalPrice;
+        }
+        this.cartTotalPrice = totalPrice;
     }
 }

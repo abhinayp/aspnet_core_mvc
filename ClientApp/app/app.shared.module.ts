@@ -7,21 +7,24 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { cartComponent } from './components/cart/cart.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
         HomeComponent,
+        cartComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: 'home', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', redirectTo: '', pathMatch: 'full' },
             { path: '', component: HomeComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: 'home' },
+            { path: 'cart', component: cartComponent }
         ])
     ]
 })
