@@ -74,6 +74,8 @@ export class HomeComponent {
     // Create a new item
     createItem() {
         let item = this.createShoppingItem;
+        delete item.id;
+
         this.http.post('/item', item).subscribe(result => {
             if (!result.json()) {
                 this.getItemsDetails('');
