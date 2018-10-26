@@ -29,6 +29,7 @@ export class HomeComponent {
 
     //Inital Load
     constructor(public http: Http) {
+        this.updateTitleBar();
         this.getItemsDetails('');
     }
 
@@ -50,7 +51,7 @@ export class HomeComponent {
 
         if (itemName == "") {
             this.http.get('/item').subscribe(result => {
-                this.updateTitleBar(true);
+                // this.updateTitleBar(true);
                 this.showAll = true;
                 this.shoppingItems = result.json();
             });
@@ -65,7 +66,7 @@ export class HomeComponent {
                 this.showAll = false;
                 let shoppingItem: ShoppingItem = result.json();
                 this.shoppingItem = shoppingItem;
-                this.updateTitleBar();
+                // this.updateTitleBar();
             });
         }
     }
@@ -103,6 +104,7 @@ export class HomeComponent {
 
     deleteItem(item: ShoppingItem) {
         this.http.post(`/item/delete/${item.id}`, null).subscribe(result => {
+            this.deleteFromCart(item);
             this.getItemsDetails('');
         });
     }
@@ -113,17 +115,17 @@ export class HomeComponent {
 
     onClickEdit(status: boolean = false) {
         this.editItem = status;
-        this.updateTitleBar();
+        // this.updateTitleBar();
     }
 
     updateTitleBar(defaultValues?:boolean, title?: string, description?: string) {
-        this.title = title || this.shoppingItem.title;
-        this.description = description || this.shoppingItem.description;
+        // this.title = title || this.shoppingItem.title;
+        // this.description = description || this.shoppingItem.description;
 
-        if (defaultValues) {
+        // if (defaultValues) {
             this.title = "Shopping List";
             this.description = "List of items that are avaialble to shop";
-        }
+        // }
     }
 
 

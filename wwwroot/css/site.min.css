@@ -1,1 +1,18 @@
-body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.carousel-caption p{font-size:20px;line-height:1.4}.carousel-inner .item img[src$=".svg"]{width:100%}#qrCode{margin:15px}@media screen and (max-width:767px){.carousel-caption{display:none}}
+
+.bg-background {
+  background-color: #f1f1f1;
+}
+
+a.no-text-decoration:hover {
+  text-decoration: none;
+}
+
+.shadow-hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: 0.3s;
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: scale(1.02);
+}
