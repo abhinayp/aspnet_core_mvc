@@ -16,3 +16,13 @@ a.no-text-decoration:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: scale(1.02);
 }
+
+.o-hidden {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.h-30 {
+    max-height: 30px;
+}

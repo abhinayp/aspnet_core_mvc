@@ -89,9 +89,9 @@
                     <div class="p-3 px-4 pt-4 rounded-bottom">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="float-left">
-                                    <h3 class="text-dark">{{formatter().format(item.price)}}</h3>
-                                    <div class="text-dark">{{item.description}}</div>
+                                <div class="float-left w-50">
+                                    <h4 class="text-dark">{{formatter().format(item.price)}}</h4>
+                                    <div class="text-dark h-30 o-hidden">{{item.description}}</div>
                                 </div>
                                 <div class="float-right">
                                     <button class="btn btn-primary" (click)="addToCart(item)">Add to Cart</button>
