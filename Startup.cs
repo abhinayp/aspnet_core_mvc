@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,7 +35,10 @@ namespace assignment4
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.Configure<JWTSettings>(Configuration.GetSection("JWTSettings"));
+            services.AddDbContext<UserDbContext>(opt => opt.UseInMemoryDatabase());
 
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -63,6 +68,7 @@ namespace assignment4
                 app.UseHsts();
             }
 
+            app.UseIdentity();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

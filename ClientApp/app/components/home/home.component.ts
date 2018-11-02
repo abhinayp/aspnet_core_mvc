@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Http,Headers, Response, Request, RequestMethod, URLSearchParams, RequestOptions } from "@angular/http";
 import { ShoppingItem } from '../model/ShoppingItem';
 import { CartItemDetails } from "../model/CartItemDetails";
+import { User } from '../model/User';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'home',
@@ -27,10 +29,18 @@ export class HomeComponent {
     public description: string = "";
     public cartTotalPrice: number = 0;
 
+    public userLogin: User = new User("", "");
+    public userDetails = {
+        status: false,
+        user: new User("", ""),
+        error: "",
+    };
+
     //Inital Load
     constructor(public http: Http) {
         this.updateTitleBar();
         this.getItemsDetails('');
+        this.checkCurrentUser();
     }
 
     formatter() {
@@ -164,4 +174,50 @@ export class HomeComponent {
         }
         this.cartTotalPrice = totalPrice;
     }
+
+    /**
+     * LOGIN
+     */
+
+    loginD() {
+        let user: User = this.userLogin;
+        this.http.post('/account/sign-in', user).subscribe(result => {
+            if (result.json() && result.json().user) {
+                this.userDetails.status = true;
+                this.userDetails.user = user;
+                // $('#closeLoginModal').click();
+                return
+            }
+
+            this.userDetails.status = false;
+            this.userDetails.error = "Login Failed";
+
+        });
+    }
+
+    currentUser(callback: any) {
+        this.http.get('/account/current-user').subscribe(result => {
+            callback(result.json());
+            console.log(result.json())
+        });
+    }
+
+    logout() {
+        this.http.post('/account/logout', {}).subscribe(result => {
+            this.userDetails.status = false;
+            this.userDetails.user = new User("", "");
+        });
+    }
+
+    checkCurrentUser() {
+        this.currentUser((result: any) => {
+            if (result && result["user"]) {
+                let email: string = result["user"]
+                let user: User = new User(email, "");
+                this.userDetails.status = true;
+                this.userDetails.user = user;
+            }
+        });
+    }
+
 }
