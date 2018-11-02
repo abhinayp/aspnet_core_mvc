@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
@@ -52,7 +53,7 @@ namespace assignment4
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -68,6 +69,8 @@ namespace assignment4
                 app.UseHsts();
             }
 
+            SeedData(userManager, roleManager);
+
             app.UseIdentity();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -82,6 +85,65 @@ namespace assignment4
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public static void SeedData(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            SeedRoles(roleManager);
+            SeedUsers(userManager);
+        }
+
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            if (!roleManager.RoleExistsAsync("NormalUser").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "NormalUser";
+                IdentityResult roleResult = roleManager.
+                CreateAsync(role).Result;
+            }
+
+
+            if (!roleManager.RoleExistsAsync("Administrator").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "Administrator";
+                IdentityResult roleResult = roleManager.
+                CreateAsync(role).Result;
+            }
+        }
+
+        public async static void SeedUsers(UserManager<IdentityUser> userManager)
+        {
+            if (userManager.FindByNameAsync("user1").Result == null)
+            {
+                IdentityUser user = new IdentityUser();
+                user.Email = "user1@localhost";
+                user.UserName = "user1@localhost";
+
+                IdentityResult result = userManager.CreateAsync(user, "User12345$").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user,"NormalUser").Wait();
+                }
+            }
+
+
+            if (userManager.FindByNameAsync("user2").Result == null)
+            {
+                IdentityUser user = new IdentityUser();
+                user.Email = "user2@localhost";
+                user.UserName = "user2@localhost";
+
+                IdentityResult result = userManager.CreateAsync(user, "User12345$").Result;
+
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user,"Administrator").Wait();
+                }
+            }
         }
     }
 }

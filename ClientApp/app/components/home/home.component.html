@@ -26,7 +26,7 @@
                             </div>
                             <div class="dropdown-menu p-0 w-100 mt-3 ml-2 border-0" aria-labelledby="dropdownMenuButton">
                                 <div *ngIf="cartItem.length > 0" class="bg-light p-2 rounded text-dark shadow border">
-                                    <div *ngFor="let item of cartItem">
+                                    <div *ngFor="let item of cartItem; let i = index">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="float-left">
@@ -54,6 +54,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mt-3">
+                                                    <div class="float-left">
+                                                        <button class="btn btn-sm btn-danger mr-2" (click)="decrementFromCart(i)">-</button>
+                                                        <button class="btn btn-sm btn-primary" (click)="addToCart(item.CItem)">+</button>
+                                                    </div>
+                                                    <div class="float-right">
+                                                        <button class="btn btn-sm btn-danger" (click)="deleteFromCart(item.CItem)">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <hr />
                                     </div>
                                     <div class="h4 text-center text-success">
@@ -65,7 +78,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="text-right">
-                            <button type="button" class="btn btn-sm btn-light shadow-sm text-primary mr-3" data-toggle="modal" data-target="#createModal">
+                            <button *ngIf="adminstrator" type="button" class="btn btn-sm btn-light shadow-sm text-primary mr-3" data-toggle="modal" data-target="#createModal">
                                 <span class="glyphicon glyphicon-plus"></span> Create Item
                             </button>
                             <span *ngIf="userDetails.status; else login">
@@ -80,6 +93,7 @@
                                 <!-- <span class="p-2 bg-light text-primary shadow-sm rounded">{{userDetails.user.email}}</span> -->
                             </span>
                             <ng-template #login>
+                                <a class="text-primary mx-3" href="#" data-toggle="modal" data-target="#registerModal">Register</a>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
                                     <span class="glyphicon glyphicon-plus"></span> Sign in
                                 </button>
@@ -160,8 +174,8 @@
                             </div>
                             <ng-template #options>
                                 <div class="my-3">
-                                    <button class="btn btn-primary" (click)="onClickEdit(true)">Edit</button>
-                                    <span class="mx-2">
+                                    <button *ngIf="adminstrator" class="btn btn-primary" (click)="onClickEdit(true)">Edit</button>
+                                    <span *ngIf="adminstrator" class="mx-2">
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                     </span>
                                     <a href="#" class="text-primary mx-2" (click)="addToCart(shoppingItem)">Add to Cart</a>
@@ -261,14 +275,55 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <span class="text-danger" *ngIf="userDetails.error">
+                        <span class="text-danger mr-3" *ngIf="userDetails.error">
                             {{userDetails.error}}
                         </span>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="loginD()">Login</button>
+                        <button type="submit" class="btn btn-primary" (click)="loginD()">Login</button>
                         <span data-dismiss="modal" id="closeLoginModal"></span>
                     </div>
                 </div>
             </div>
         </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            <small class="text-primary">Email</small>
+                            <input class="form-control" [(ngModel)]="userRegister.Email" name="email" type="text" placeholder="Enter Email" />
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-primary">Password</small>
+                            <input class="form-control" [(ngModel)]="userRegister.Password" name="password" type="password" placeholder="Enter Password" />
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-primary">Confirm Password</small>
+                            <input class="form-control" [(ngModel)]="userRegister.ConfirmPassword" name="password" type="password" placeholder="Enter Password" />
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-primary">Role</small>
+                            <select class="form-control" [(ngModel)]="userRegister.UserRoles">
+                                <option *ngFor="let role of roles" value="{{role}}">{{role}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="text-danger mr-3">{{registrationError}}</span>
+                    <button type="submit" class="btn btn-primary" (click)="registerD()">Register</button>
+                    <span data-dismiss="modal" id="closeRegisterModal"></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

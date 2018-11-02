@@ -40,5 +40,6 @@
     <Compile Remove="Models\ShoppingListContext.cs" />
     <Compile Remove="Models\ErrorViewModel.cs" />
     <Compile Remove="Controllers\ShoppingListController.cs" />
+    <Compile Remove="Models\Role.cs" />
   </ItemGroup>
 </Project>

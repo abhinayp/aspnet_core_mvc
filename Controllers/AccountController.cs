@@ -19,25 +19,40 @@ namespace assignment4.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly JWTSettings _options;
 
         public AccountController(
           UserManager<IdentityUser> userManager,
           SignInManager<IdentityUser> signInManager,
+          RoleManager<IdentityRole> roleManager,
           IOptions<JWTSettings> optionsAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _options = optionsAccessor.Value;
+            _roleManager = roleManager;
         }
 
         [HttpGet("current-user")]
-        public IActionResult currentUser()
+        public async Task<IActionResult> currentUser()
         {
-            var user = User.Identity.Name;
+            var email = User.Identity.Name;
+            var user = await _userManager.FindByEmailAsync(email);
+            var roles = await _userManager.GetRolesAsync(user);
             Dictionary<string, dynamic> u = new Dictionary<string, dynamic>{};
-            u["user"] = user;
+            u["user"] = email;
+            u["roles"] = roles.ToList();
+            return new JsonResult(u);
+        }
+
+        [HttpPost("get-roles")]
+        public IActionResult getRoles()
+        {
+            var roles = _roleManager.Roles.ToList();
+            Dictionary<string, dynamic> u = new Dictionary<string, dynamic> { };
+            u["roles"] = roles.ToList();
             return new JsonResult(u);
         }
 
@@ -65,7 +80,7 @@ namespace assignment4.Controllers
                 }
                 return new JsonResult("Unable to sign in");
             }
-            return Error("Unexpected error");
+            return new JsonResult("Unexpected error");
         }
 
         [HttpPost("logout")]
@@ -77,7 +92,7 @@ namespace assignment4.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] Credentials Credentials)
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel Credentials)
         {
             if (ModelState.IsValid)
             {
@@ -86,16 +101,18 @@ namespace assignment4.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddToRoleAsync(user, Credentials.UserRoles);
                     return new JsonResult(new Dictionary<string, object>
-          {
-            { "access_token", GetAccessToken(Credentials.Email) },
-            { "id_token", GetIdToken(user) }
-          });
+                      {
+                        { "access_token", GetAccessToken(Credentials.Email) },
+                        { "id_token", GetIdToken(user) },
+                        { "user", user }
+                      });
                 }
-                return Errors(result);
+                return new JsonResult("Error");
 
             }
-            return Error("Unexpected error");
+            return new JsonResult("Unexpected error");
         }
 
         private string GetIdToken(IdentityUser user)

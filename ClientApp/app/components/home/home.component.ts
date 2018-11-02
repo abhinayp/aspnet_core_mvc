@@ -30,17 +30,28 @@ export class HomeComponent {
     public cartTotalPrice: number = 0;
 
     public userLogin: User = new User("", "");
+    public userRegister = {
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        UserRoles: ""
+    }
+    public registrationError: string = "";
     public userDetails = {
         status: false,
         user: new User("", ""),
         error: "",
+        roles: new Array
     };
+    public adminstrator: boolean = false;
+    public roles = [];
 
     //Inital Load
     constructor(public http: Http) {
         this.updateTitleBar();
         this.getItemsDetails('');
         this.checkCurrentUser();
+        this.getRoles(this.setRole.bind(this));
     }
 
     formatter() {
@@ -161,6 +172,15 @@ export class HomeComponent {
       this.calCartTotalPrice()
     }
 
+    decrementFromCart(index: number) {
+        this.cartItem[index].CQty = this.cartItem[index].CQty - 1;
+        this.cartItem[index].CTotalPrice = this.cartItem[index].CItem.price * this.cartItem[index].CQty
+        if (this.cartItem[index].CQty == 0) {
+            this.cartItem.splice(index, 1);
+        }
+        this.calCartTotalPrice();
+    }
+
     onShowCart(status: boolean) {
         this.showCart = status;
         this.calCartTotalPrice();
@@ -183,9 +203,9 @@ export class HomeComponent {
         let user: User = this.userLogin;
         this.http.post('/account/sign-in', user).subscribe(result => {
             if (result.json() && result.json().user) {
-                this.userDetails.status = true;
-                this.userDetails.user = user;
-                // $('#closeLoginModal').click();
+                this.checkCurrentUser()
+                $('#closeLoginModal').click();
+                $('.modal-backdrop').remove();
                 return
             }
 
@@ -198,7 +218,6 @@ export class HomeComponent {
     currentUser(callback: any) {
         this.http.get('/account/current-user').subscribe(result => {
             callback(result.json());
-            console.log(result.json())
         });
     }
 
@@ -206,6 +225,8 @@ export class HomeComponent {
         this.http.post('/account/logout', {}).subscribe(result => {
             this.userDetails.status = false;
             this.userDetails.user = new User("", "");
+            this.userDetails.roles = [];
+            this.adminstrator = false;
         });
     }
 
@@ -216,8 +237,53 @@ export class HomeComponent {
                 let user: User = new User(email, "");
                 this.userDetails.status = true;
                 this.userDetails.user = user;
+                this.userDetails.roles = result["roles"]
+                this.userDetails.error = "";
+                if (this.userDetails.roles.indexOf("Administrator") > -1) {
+                    this.adminstrator = true;
+                }
+                else {
+                    this.adminstrator = false;
+                }
+            }
+            else {
+                this.adminstrator = false;
+            }
+            this.registrationError = "";
+        });
+    }
+
+    registerD() {
+        this.http.post('/account', this.userRegister).subscribe(result => {
+            if (result.json() && result.json().user) {
+                this.checkCurrentUser()
+                $('#closeRegisterModal').click();
+                $('.modal-backdrop').remove();
+                return
+            }
+
+            this.registrationError = "Registration error"
+
+        });
+    }
+
+    getRoles(callback?: any) {
+        this.http.post('/account/get-roles', {}).subscribe(result => {
+            let roles = [];
+            if (result.json() && result.json()['roles']) {
+                roles = result.json()['roles'].map((r: any) => {
+                    return r.name;
+                });
+            }
+            this.roles = roles;
+            if (callback) {
+                callback();
             }
         });
+    }
+
+    setRole() {
+        this.userRegister.UserRoles = this.roles[0];
     }
 
 }
